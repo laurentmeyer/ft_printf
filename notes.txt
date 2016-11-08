@@ -1,0 +1,14 @@
+int	printf(const char * restrict format, ...);
+
+qu'est ce que restrict? format?
+quel nom technique pour les ... ?
+
+These functions write the output under the control of a format string that specifies how subsequent arguments (or arguments accessed via the variable-length argument facilities of stdarg(3)) are converted for output.
+Each conversion specification is introduced by the % character.
+The arguments must correspond properly (after type promotion => ???) with the conversion specifier.
+
+Besoin de gérer le $ ? Sert a dire quel argument on référence
+Ps de gestion de la conversion n.
+
+Conversions : permet de faire la string interpolation
+s: 
