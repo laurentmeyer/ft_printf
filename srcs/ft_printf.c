@@ -4,24 +4,24 @@
 #include <unistd.h>
 
 
-int				print_without_percent(const char *s)
+int				print_without_percent(char *start, char *end)
 {
 	char	*pos;
 
-	if (!(pos = ft_strstr(s, "&&")))
-		ft_putstr(s);
+	if (!(pos = ft_strstr(start, "&&")))
+		write(1, start, end - start);
 	else
 	{
-		write(1, s, pos - s);
-		ft_putstr(pos + 1);
+		write(1, start, pos - start);
+		write(1, pos + 1, end - pos - 1);
 	}
 	return (0);
 }
 
-const char		*next_single_percent(const char * s)
+char		*next_single_percent(char * s)
 {
 	if (s[0] == '%' && s[1] != '%')
-		return ((const char *)s);
+		return (s);
 	else if (*s == '\0')
 		return (NULL);
 	else if (s[0] == '%' && s[1] == '%')
@@ -30,33 +30,44 @@ const char		*next_single_percent(const char * s)
 		return (next_single_percent(s + 1));
 }
 
-int				ft_vprintf(const char * restrict format, va_list args)
+int				ft_vprintf(const char * restrict format, va_list ap)
 {
-	const char	*end;
+	char		*s;
+	char		*end;
+	char		param;
 
-	if (!(end = next_single_percent(format)))
-		return (print_without_percent(format, ft_strchr(format, '\0')));
-	// ICI ICI ICI
+	s = (char *)format; 
+	write(1, s, (end = next_single_percent(s)) ? end - po
+	if (!)
+	while (*s)
+	{
+		if (!(end = next_single_percent(s)))
+			return (print_without_percent(s, ft_strchr(s, '\0')));
+		else
+		{
+			print_without_percent(s, end);
+			param = va_arg(ap,int);
+			s = next_single_percent(s) + 1;
+		}
+	}
+	return (0);
 }
 
 int		ft_printf(const char * restrict format, ...)
 {
 	va_list		ap;
-	const char	*s;
 
 
 	va_start(ap, format);
-	s = format;
-	while (ft_vprintf(s, va_arg(ap, char *)))
-		s = next_single_percent(s) + 1;
+	ft_vprintf(format, ap);
 	va_end(ap);
 	return (0);
 }
 
 int		main(void)
 {
-//	printf("%%coucou\n");
-	printf("%s\n", next_single_percent(("c'es%c cool!%c")));
-//	ft_printf("%c'es%c cool!%c", 'C', 't', '\n');
+	//	printf("%%coucou\n");
+	//	printf("%s\n", next_single_percent(("c'es%c cool!%c")));
+	ft_printf("%c'es%c cool!%c", 'C', 't', '\n');
 	return (0);
 }
