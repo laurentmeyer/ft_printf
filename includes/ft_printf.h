@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/15 17:15:07 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/15 18:52:20 by lmeyer           ###   ########.fr       */
+/*   Created: 2016/12/14 19:54:20 by lmeyer            #+#    #+#             */
+/*   Updated: 2016/12/16 20:41:50 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-void		ft_printf(void)
-{
-	ft_putstr("coucou toi\n");
-}
+# include <stdarg.h>
+# define CONVERSIONS "sSpdDioOuUxXcC"
+
+#endif

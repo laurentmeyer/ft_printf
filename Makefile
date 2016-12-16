@@ -1,39 +1,45 @@
-OBJECTS =	ft_printf.o
+CC = 		gcc
+CFLAGS =	-Wall -Wextra -Werror
+NAME =		libftprintf.a
+TEMP =		temp.a
+BUILDDIR =	srcs
+SOURCEDIR =	srcs
+HEADERDIR = includes
 
-NAME = ft_printf
+LFTPATH =	./libft
+LIBFT = 	$(LFTPATH)/libft.a
 
-LIBFT = ./libft/
+CCHEADERS = -I./$(HEADERDIR)	\
+			-I$(LFTPATH)/includes
 
-CCHEADERS = -I ./includes/			\
-			-I $(LIBFT)includes/
+SRCFILES =	ft_printf.c
 
-CCSOURCES = ./srcs/
+SOURCES =	$(SRCFILES:%.c=$(SOURCEDIR)/%.c)
+OBJECTS =	$(SOURCES:$(SOURCEDIR)/%.c=$(BUILDDIR)/%.o)
 
-CCLIBS = -L$(LIBFT) -lft
-
-CFLAGS = -Wall -Wextra -Werror
-
-SOURCES = $(OBJECTS:%.o=$(CCSOURCES)%.c)
+.PHONY: all clean fclean re
 
 all : $(NAME)
-.PHONY: all
 
-$(NAME) : libs
-	gcc $(CFLAGS) -o $(NAME) $(CCHEADERS) $(CCLIBS) $(SOURCES)
+$(NAME) : $(OBJECTS)
+	$(MAKE) -C $(LFTPATH)
+	ar rcs $(TEMP) $(OBJECTS)
+	libtool -static -o $(NAME) $(LIBFT) $(TEMP)
+	rm $(TEMP)
+	#ar -t libftprintf.a
 
-libs: 
-	$(MAKE) -C $(LIBFT)
-.PHONY: libs
+$(BUILDDIR)/%.o : $(SOURCEDIR)/%.c
+	$(CC) $(CFLAGS) $(CCHEADERS) -c $< -o $@
 
 clean:
-	$(MAKE) -C $(LIBFT) clean
+	$(MAKE) -C $(LFTPATH) clean
 	rm -f $(OBJECTS)
-.PHONY: clean
 
 fclean: clean
-	$(MAKE) -C $(LIBFT) fclean
+	$(MAKE) -C $(LFTPATH) fclean
 	rm -f $(NAME)
-.PHONY: fclean
 
 re: fclean all
-.PHONY: re
+	
+
+#################ENLEVER LES COMMENTAIRES / VERIFS ####################
