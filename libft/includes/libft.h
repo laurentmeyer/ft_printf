@@ -92,5 +92,7 @@ int						ft_countwords(char const *s, char c);
 int						ft_atoi_hex(char *s);
 int						ft_is_hex_str(char *s);
 char					*ft_strndup(const char *s1, size_t n);
+char					*ft_insert_str(char *dst, char *start,
+										char *end, char *src);
 
 #endif

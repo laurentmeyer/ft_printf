@@ -12,7 +12,10 @@ LIBFT = 	$(LFTPATH)/libft.a
 CCHEADERS = -I./$(HEADERDIR)	\
 			-I$(LFTPATH)/includes
 
-SRCFILES =	ft_printf.c
+SRCFILES =	ft_printf.c			\
+			ft_asprintf.c		\
+			get_conversion.c	\
+			fill_conversion.c
 
 SOURCES =	$(SRCFILES:%.c=$(SOURCEDIR)/%.c)
 OBJECTS =	$(SOURCES:$(SOURCEDIR)/%.c=$(BUILDDIR)/%.o)

@@ -1,19 +1,31 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/14 19:54:20 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/16 20:41:50 by lmeyer           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-
 # include <stdarg.h>
 # define CONVERSIONS "sSpdDioOuUxXcC"
+# define TEST "42"
 
-#endif
+enum				e_modif
+{
+	hh,
+	h,
+	none,
+	l,
+	ll,
+	j,
+	z
+};
+
+typedef struct		s_conv
+{
+	int				flags;
+	int				min_width;
+	int				precision;
+	enum e_modif	length_mod;
+	char			conv_type;
+}					t_conv;
+
+typedef char 		*t_handler(void *);
+
+int					ft_asprintf(char **ret, const char *format, ...);
+char				*ft_vasprintf(char *format, va_list ap);
+char				*next_conversion_start(char *format);
+char				*next_conversion_end(char *format);
+char				*interpret_arg(void *arg, char *spec);
