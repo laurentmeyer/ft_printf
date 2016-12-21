@@ -15,7 +15,12 @@ CCHEADERS = -I./$(HEADERDIR)	\
 SRCFILES =	ft_printf.c			\
 			ft_asprintf.c		\
 			get_conversion.c	\
-			fill_conversion.c
+			new_conversion.c	\
+			get_handler.c		\
+			get_modifier.c		\
+			get_flags.c			\
+			get_precision.c		\
+			get_width.c
 
 SOURCES =	$(SRCFILES:%.c=$(SOURCEDIR)/%.c)
 OBJECTS =	$(SOURCES:$(SOURCEDIR)/%.c=$(BUILDDIR)/%.o)

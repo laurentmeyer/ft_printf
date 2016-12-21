@@ -6,7 +6,7 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 11:26:13 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/21 12:32:17 by lmeyer           ###   ########.fr       */
+/*   Updated: 2016/12/21 20:48:46 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,33 @@ static void	remove_double_percent(char *s)
 	remove_double_percent(s + 1);
 }
 
+static char	*interpret_arg(t_conv *conv, va_list ap)
+{
+	char	*ret;
+
+	if (conv->conversion == '%')
+		ret = (*get_handler(conv))(conv, "");
+	else
+		ret = (*get_handler(conv))(conv, va_arg(ap, void *));
+	return (ret);
+}
+
 int			ft_vasprintf(char **ret, const char *format, va_list ap)
 {
 	char	*start;
 	char	*end;
-	char	*spec;
 	char	*interpret;
+	t_conv	*conv;
 	int		find;
 
 	if (!(*ret = ft_strdup(format)))
 		return (ERR);
 	while ((find = find_next_conversion(*ret, &start, &end)))
 	{
-		if (find == ERR	|| !(spec = ft_strndup(start, end - start + 1)))
+		if (find == ERR	|| !(conv = new_conversion(start, end - start + 1)))
 			return (ERR);
-		interpret = interpret_arg(*end == '%' ? "" : va_arg(ap, void *), spec);
-		free(spec);
+		interpret = interpret_arg(conv, ap);
+		free(conv);
 		if (!interpret || !(*ret = ft_insert_str(*ret, start, end, interpret)))
 			return (ERR);
 		free(interpret);

@@ -6,7 +6,7 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 11:26:35 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/21 12:26:27 by lmeyer           ###   ########.fr       */
+/*   Updated: 2016/12/21 21:33:07 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <locale.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <limits.h>
 #define	PFC(...)														\
 	printf("  printf(" #__VA_ARGS__ ")\n=====> ");					\
 printf(__VA_ARGS__)
@@ -24,18 +25,7 @@ printf(__VA_ARGS__)
 
 int		main(void)
 {
-	char	*ret;
-
-	if (ft_asprintf(&ret, "percents = %   %    %%, arg1 = %  s, arg2 = %s\n", "arg1", "arg2") == ERR)
-		printf("ERREUR\n");
-	else
-		ft_putstr(ret);
-	free(ret);
-//	if (ft_printf("%%%%%%\n") == ERR)
-//		ft_putstr("Erreur\n");
-//	if (ft_printf("percents = %   %    %%, arg1 = %  s, arg2 = %s\n", "arg1", "arg2") == ERR)
-//		ft_putstr("Erreur\n");
-	while (42)
-		;
+	ft_printf("ft_d = %01ld\n", 42L);
+	printf("cc_d = %01ld\n", 42L);
 	return (0);
 }

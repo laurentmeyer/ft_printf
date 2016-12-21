@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_conversion.c                                   :+:      :+:    :+:   */
+/*   get_precision.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 11:26:27 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/21 18:26:08 by lmeyer           ###   ########.fr       */
+/*   Created: 2016/12/21 20:31:05 by lmeyer            #+#    #+#             */
+/*   Updated: 2016/12/21 20:39:36 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
 
-#include <stdio.h>
-
-int		find_next_conversion(char *format, char **start, char **end)
+int		get_precision(char *str)
 {
-	char	*tmp;
+	char	*s;
 	int		i;
 
-	if (!(tmp = ft_strchr(format, '%')))
-		return (0);
-	if (tmp[1] == '%')
-		return (find_next_conversion(tmp + 2, start, end));
-	i = 1;
-	while (tmp[i])
-		if ((ft_strchr(CONVERSIONS, tmp[i++])))
-		{
-			*start = tmp;
-			*end = tmp + i - 1;
-			return (1);
-		}
-	return (ERR);
+	if (!(s = ft_strchr(str, '.')))
+		return (ERR);
+	i = ft_atoi(s + 1);
+	return (i >= 0 ? i : ERR);
 }
