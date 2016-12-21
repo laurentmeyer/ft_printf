@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/20 11:26:01 by lmeyer            #+#    #+#             */
+/*   Updated: 2016/12/20 16:40:07 by lmeyer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 # include <stdarg.h>
-# define CONVERSIONS "sSpdDioOuUxXcC"
-# define TEST "42"
+# define CONVERSIONS "sSpdDioOuUxXcC%"
+# define ERR -1
 
 enum				e_modif
 {
@@ -24,8 +36,9 @@ typedef struct		s_conv
 
 typedef char 		*t_handler(void *);
 
+int					ft_printf(const char *format, ...);
+int					ft_vprintf(const char *format, va_list ap);
 int					ft_asprintf(char **ret, const char *format, ...);
-char				*ft_vasprintf(char *format, va_list ap);
-char				*next_conversion_start(char *format);
-char				*next_conversion_end(char *format);
+int					ft_vasprintf(char **ret, const char *format, va_list ap);
+int					find_next_conversion(char *format, char **start, char **end);
 char				*interpret_arg(void *arg, char *spec);
