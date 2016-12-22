@@ -6,7 +6,7 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 15:47:56 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/16 21:18:07 by lmeyer           ###   ########.fr       */
+/*   Updated: 2016/12/22 18:00:47 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,9 @@ int						ft_is_hex_str(char *s);
 char					*ft_strndup(const char *s1, size_t n);
 char					*ft_insert_str(char *dst, char *start,
 										char *end, char *src);
+char					*ft_strrev(char *s);
+char					*ft_itoa_base(int value, int base);
+void					ft_strtolower(char *s);
+char					*ft_strlast(char *s);
 
 #endif

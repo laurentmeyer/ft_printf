@@ -6,44 +6,33 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 11:26:07 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/21 19:56:49 by lmeyer           ###   ########.fr       */
+/*   Updated: 2016/12/22 15:26:27 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
 #include <stdlib.h>
-
-static char		*handler_percent(t_conv *conv, void *arg)
-{
-	(void)arg;
-	(void)conv;
-	return (ft_strdup("%%"));
-}
-
-static char		*handler_string(t_conv *conv, void *arg)
-{
-	(void)conv;
-	return (ft_strdup((char *)arg));
-}
-
-static char		*handler_integer(t_conv *conv, void *arg)
-{
-	t_types	u;
-
-	(void)conv;
-	u.generic = arg;
-	return (ft_itoa(u.d));
-}
+#include <stdio.h>
 
 t_handler	*get_handler(t_conv *conv)
 {
 	t_handler	*tab[127];
 
-	tab[(int)'s'] = &handler_string;
 	tab[(int)'%'] = &handler_percent;
-	tab[(int)'d'] = &handler_integer;
-	tab[(int)'i'] = &handler_integer;
-	tab[(int)'o'] = &handler_integer;
+	tab[(int)'s'] = &handler_string;
+//	tab[(int)'S'] = &handler_string;
+//	tab[(int)'p'] = &handler_string;
+	tab[(int)'d'] = &handler_integers;
+	tab[(int)'D'] = &handler_integers;
+	tab[(int)'i'] = &handler_integers;
+	tab[(int)'o'] = &handler_integers;
+	tab[(int)'O'] = &handler_integers;
+	tab[(int)'u'] = &handler_integers;
+	tab[(int)'U'] = &handler_integers;
+	tab[(int)'x'] = &handler_integers;
+	tab[(int)'X'] = &handler_integers;
+//	tab[(int)'c'] = &handler_string;
+//	tab[(int)'C'] = &handler_string;
 	return (tab[(int)(conv->conversion)]);
 }

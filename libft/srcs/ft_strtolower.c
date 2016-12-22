@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_insert_str.c                                    :+:      :+:    :+:   */
+/*   ft_strtolower.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/21 12:30:28 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/22 17:17:22 by lmeyer           ###   ########.fr       */
+/*   Created: 2016/12/22 14:42:01 by lmeyer            #+#    #+#             */
+/*   Updated: 2016/12/22 14:48:56 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_insert_str(char *dst, char *start, char *end, char *src)
+void		ft_strtolower(char *s)
 {
-	char	*new;
-
-	if ((new = (char *)malloc(ft_strlen(dst) + ft_strlen(src) - (end - start) + 1)))
-	{
-		ft_strncpy(new, dst, start - dst);
-		ft_strcpy(new + (start - dst), src);
-		ft_strcpy(new + (start - dst) + ft_strlen(src), end);
-		free(dst);
-	}
-	return (new);
+	if (!*s)
+		return ;
+	*s = ft_tolower(*s);
+	ft_strtolower(s + 1);
 }

@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_insert_str.c                                    :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/21 12:30:28 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/22 17:17:22 by lmeyer           ###   ########.fr       */
+/*   Created: 2016/12/22 11:07:10 by lmeyer            #+#    #+#             */
+/*   Updated: 2016/12/22 11:09:09 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
 
-char	*ft_insert_str(char *dst, char *start, char *end, char *src)
+char	*ft_strrev(char *s)
 {
-	char	*new;
+	int		i;
+	int		j;
+	char	*res;
 
-	if ((new = (char *)malloc(ft_strlen(dst) + ft_strlen(src) - (end - start) + 1)))
-	{
-		ft_strncpy(new, dst, start - dst);
-		ft_strcpy(new + (start - dst), src);
-		ft_strcpy(new + (start - dst) + ft_strlen(src), end);
-		free(dst);
-	}
-	return (new);
+	i = 0;
+	while (s[i])
+		++i;
+	if (!(res = (char *)malloc(i + 1)))
+		return (NULL);
+	res[i] = '\0';
+	j = 0;
+	while (--i >= 0)
+		res[j++] = s[i];
+	return (res);
 }

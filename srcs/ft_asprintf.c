@@ -6,7 +6,7 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 11:26:13 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/21 20:48:46 by lmeyer           ###   ########.fr       */
+/*   Updated: 2016/12/22 17:36:11 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int			ft_vasprintf(char **ret, const char *format, va_list ap)
 			return (ERR);
 		interpret = interpret_arg(conv, ap);
 		free(conv);
-		if (!interpret || !(*ret = ft_insert_str(*ret, start, end, interpret)))
+		if (!interpret || !(*ret = ft_insert_str(*ret, start, end + 1, interpret)))
 			return (ERR);
 		free(interpret);
 	}

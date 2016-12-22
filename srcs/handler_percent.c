@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_insert_str.c                                    :+:      :+:    :+:   */
+/*   handler_percent.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/21 12:30:28 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/22 17:17:22 by lmeyer           ###   ########.fr       */
+/*   Created: 2016/12/22 15:26:48 by lmeyer            #+#    #+#             */
+/*   Updated: 2016/12/22 15:29:26 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
+#include "ft_printf.h"
 
-char	*ft_insert_str(char *dst, char *start, char *end, char *src)
+char		*handler_percent(t_conv *conv, void *arg)
 {
-	char	*new;
-
-	if ((new = (char *)malloc(ft_strlen(dst) + ft_strlen(src) - (end - start) + 1)))
-	{
-		ft_strncpy(new, dst, start - dst);
-		ft_strcpy(new + (start - dst), src);
-		ft_strcpy(new + (start - dst) + ft_strlen(src), end);
-		free(dst);
-	}
-	return (new);
+	(void)arg;
+	(void)conv;
+	return (ft_strdup("%%"));
 }

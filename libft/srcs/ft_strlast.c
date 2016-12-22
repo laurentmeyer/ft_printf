@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_insert_str.c                                    :+:      :+:    :+:   */
+/*   ft_strlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/21 12:30:28 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/22 17:17:22 by lmeyer           ###   ########.fr       */
+/*   Created: 2016/12/22 17:59:32 by lmeyer            #+#    #+#             */
+/*   Updated: 2016/12/22 18:02:37 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_insert_str(char *dst, char *start, char *end, char *src)
+char	*ft_strlast(char *s)
 {
-	char	*new;
-
-	if ((new = (char *)malloc(ft_strlen(dst) + ft_strlen(src) - (end - start) + 1)))
-	{
-		ft_strncpy(new, dst, start - dst);
-		ft_strcpy(new + (start - dst), src);
-		ft_strcpy(new + (start - dst) + ft_strlen(src), end);
-		free(dst);
-	}
-	return (new);
+	return (s + ft_strlen(s) - 1);
 }

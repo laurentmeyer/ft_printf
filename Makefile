@@ -20,7 +20,11 @@ SRCFILES =	ft_printf.c			\
 			get_modifier.c		\
 			get_flags.c			\
 			get_precision.c		\
-			get_width.c
+			get_width.c			\
+			handler_integers.c	\
+			handler_percent.c	\
+			handler_string.c	\
+			ft_itoa_base_max.c
 
 SOURCES =	$(SRCFILES:%.c=$(SOURCEDIR)/%.c)
 OBJECTS =	$(SOURCES:$(SOURCEDIR)/%.c=$(BUILDDIR)/%.o)

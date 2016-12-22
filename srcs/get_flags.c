@@ -6,19 +6,12 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 20:49:14 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/21 21:31:54 by lmeyer           ###   ########.fr       */
+/*   Updated: 2016/12/21 21:46:28 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
-#define FLAG_LIST "-+ #0"
-#define FLAG_ALTERNATE (1 << 0)
-#define FLAG_SPACE (1 << 1)
-#define FLAG_ZERO (1 << 2)
-#define FLAG_MINUS (1 << 3)
-#define FLAG_PLUS (1 << 4)
-#define NON_ALTERNABLE "cdinpsu"
 
 #include <stdio.h>
 

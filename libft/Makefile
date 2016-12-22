@@ -61,7 +61,11 @@ OBJECTS =	ft_memset.o			\
 			ft_atoi_hex.o		\
 			ft_is_hex_str.o		\
 			ft_strndup.o		\
-			ft_insert_str.o
+			ft_insert_str.o		\
+			ft_strrev.o			\
+			ft_itoa_base.o		\
+			ft_strtolower.o		\
+			ft_strlast.o
 
 NAME = libft.a
 

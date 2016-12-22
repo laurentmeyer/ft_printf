@@ -6,15 +6,24 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 11:26:01 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/21 21:30:36 by lmeyer           ###   ########.fr       */
+/*   Updated: 2016/12/22 15:29:21 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 # include <stdarg.h>
+# include <inttypes.h>
+# include <wchar.h>
 # define CONVERSIONS "sSpdDioOuUxXcC%"
 # define ERR -1
+# define FLAG_ALTERNATE (1 << 0)
+# define FLAG_SPACE (1 << 1)
+# define FLAG_ZERO (1 << 2)
+# define FLAG_MINUS (1 << 3)
+# define FLAG_PLUS (1 << 4)
 
-enum				e_modif
+enum					e_modif
 {
 	none,
 	hh,
@@ -25,46 +34,55 @@ enum				e_modif
 	z
 };
 
-typedef union		u_types
+typedef union			u_types
 {
-	void			*generic;
-	signed char		hhd;
-//	signed char		hhi;
-	short			hd;
-//	short			hi;
-	int				d;
-//	int				i;
-	long			ld;
-//	long			li;
-	long long		lld;
-//	long long		lli;
-//	intmax_t		jd;
-//	intmax_t		ji;
-//	ssize_t			zd;
-//	ssize_t			zi;
-	char			*s;
-}					t_types;
+	void				*generic;
+	int					c;
+	wint_t				lc;
+	char				*s;
+	wchar_t				*ls;
+	signed char			hhd;
+	unsigned char		hhu;
+	short				hd;
+	unsigned short		hu;
+	int					d;
+	unsigned int		u;
+	long				ld;
+	unsigned long		lu;
+	long long			lld;
+	unsigned long long	llu;
+	intmax_t			jd;
+	uintmax_t			ju;
+	size_t				zd;
+	ssize_t				zu;
+}						t_types;
 
-typedef struct		s_conv
+typedef struct			s_conv
 {
-	int				flags;
-	int				width;
-	int				precision;
-	enum e_modif	modifier;
-	char			conversion;
-}					t_conv;
+	int					flags;
+	int					width;
+	int					precision;
+	enum e_modif		modifier;
+	char				conversion;
+}						t_conv;
 
-typedef char 		*t_handler(t_conv *, void *);
+typedef char 			*t_handler(t_conv *, void *);
 
-int					ft_printf(const char *format, ...);
-int					ft_vprintf(const char *format, va_list ap);
-int					ft_asprintf(char **ret, const char *format, ...);
-int					ft_vasprintf(char **ret, const char *format, va_list ap);
-int					find_next_conversion(char *format, char **start, char **end);
-//char				*interpret_arg(void *arg, char *spec);
-t_conv				*new_conversion(char *start, int len);
-t_handler			*get_handler(t_conv *conv);
-int					get_modifier(char *s);
-int					get_flags(char *s);
-int					get_precision(char *s);
-int					get_width(char *s);
+int						ft_printf(const char *format, ...);
+int						ft_vprintf(const char *format, va_list ap);
+int						ft_asprintf(char **ret, const char *format, ...);
+int						ft_vasprintf(char **ret, const char *format, va_list ap);
+int						find_next_conversion(char *format, char **start, char **end);
+t_conv					*new_conversion(char *start, int len);
+int						get_modifier(char *s);
+int						get_flags(char *s);
+int						get_precision(char *s);
+int						get_width(char *s);
+t_handler				*get_handler(t_conv *conv);
+char					*handler_integers(t_conv *conv, void *arg);
+char					*handler_string(t_conv *conv, void *arg);
+char					*handler_percent(t_conv *conv, void *arg);
+char  	  				*ft_itoa_base_max_unsigned(uintmax_t value, int base);
+char    				*ft_itoa_base_max_signed(intmax_t value, int base);
+
+#endif
