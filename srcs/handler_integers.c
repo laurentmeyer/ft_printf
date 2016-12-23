@@ -6,18 +6,13 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/22 11:05:29 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/22 18:44:29 by lmeyer           ###   ########.fr       */
+/*   Updated: 2016/12/23 15:32:39 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
 
-# define FLAG_ALTERNATE (1 << 0)
-# define FLAG_SPACE (1 << 1)
-# define FLAG_ZERO (1 << 2)
-# define FLAG_MINUS (1 << 3)
-# define FLAG_PLUS (1 << 4)
 static char *extra_chars(t_conv *conv, char *s)
 {
 	char	*digit;
@@ -34,7 +29,7 @@ static char *extra_chars(t_conv *conv, char *s)
 	}
 	if ((conv->flags & FLAG_ALTERNATE) && conv->conversion == 'o') 
 		s = ft_insert_str(s, s, s, "0");
-	if ((conv->flags & FLAG_ALTERNATE)
+	if ((conv->flags & FLAG_ALTERNATE) && !ft_strequ(s, "0") && !ft_strequ(s, "")
 			&& (conv->conversion == 'x' || conv->conversion == 'X')) 
 		s = ft_insert_str(s, s, s, "0X");
 	if ((conv->flags & FLAG_PLUS) && conv->conversion == 'd' && *s != '-') 
@@ -50,11 +45,23 @@ static char *apply_padding(t_conv *conv, char *s)
 	char	*position;
 
 	padding = (conv->flags & FLAG_ZERO) ? "0" : " ";
-	position = (conv->flags & FLAG_MINUS) ? ft_strlast(s) + 1 : s;
+	position = s;
+	if (conv->flags & FLAG_MINUS) 
+		position = ft_strlast(s) + 1;
+	else if (conv->flags & FLAG_ZERO && s[0] == '0' && (s[1] == 'x' || s[1] == 'X'))
+		position = s + 2;
+	else if (conv->flags & FLAG_ZERO && (s[0] == '+' || s[0] == '-'))
+		position = s + 1;
 	while ((int)ft_strlen(s) < conv->width)
 	{
 		s = ft_insert_str(s, position, position, padding);
-		position = (conv->flags & FLAG_MINUS) ? ft_strlast(s) + 1 : s;
+		position = s;
+		if (conv->flags & FLAG_MINUS) 
+			position = ft_strlast(s) + 1;
+		else if (s[0] == '0' && (s[1] == 'x' || s[1] == 'X'))
+			position = s + 2;
+		else if (s[0] == '+' || s[0] == '-')
+			position = s + 1;
 	}
 	return (s);
 }

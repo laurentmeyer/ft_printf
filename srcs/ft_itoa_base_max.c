@@ -16,7 +16,7 @@ char  	  *ft_itoa_base_max_unsigned(uintmax_t value, int base)
 
 	if (!(rev = (char *)malloc((8 * sizeof(intmax_t) + 1))))
 		return (NULL);
-	ft_bzero(rev, sizeof(rev));
+	ft_bzero(rev, 8 * sizeof(intmax_t) + 1);
 	rev[0] = ft_hex(value % base);
 	value /= base;
 	i = 0;
@@ -39,7 +39,7 @@ char    *ft_itoa_base_max_signed(intmax_t value, int base)
 
 	if (!(rev = (char *)malloc((8 * sizeof(intmax_t) + 1))))
 		return (NULL);
-	ft_bzero(rev, sizeof(rev));
+	ft_bzero(rev, 8 * sizeof(intmax_t) + 1);
 	sign = (value < 0 && base == 10) ? -1 : 1;
 	rev[0] = ft_hex((value % base) * (value < 0 ? -1 : 1));
 	value /= (base * (value < 0 ? -1 : 1));

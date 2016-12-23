@@ -31,17 +31,17 @@ t_conv			*new_conversion(char *start, int len)
 		return (NULL);
 	if ((new = (t_conv *)malloc(sizeof(t_conv))))
 	{
-		printf("full conversion = %s\n", s);
+//		printf("full conversion = %s\n", s);
 		new->conversion = *(ft_strlast(s));
 		new->modifier = get_modifier(s);
 		new->flags = get_flags(s);
 		new->precision = get_precision(s);
 		new->width = get_width(s);
-		printf("conversion = %c\n", new->conversion);
-		printf("flags = %d\n", new->flags);
-		printf("precision = %d\n", new->precision);
-		printf("width = %d\n", new->width);
-		printf("modifier = %d\n", new->modifier);
+//		printf("conversion = %c\n", new->conversion);
+//		printf("flags = %d\n", new->flags);
+//		printf("precision = %d\n", new->precision);
+//		printf("width = %d\n", new->width);
+//		printf("modifier = %d\n", new->modifier);
 	}
 	free(s);
 	return (new);

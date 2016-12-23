@@ -6,7 +6,7 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 11:26:35 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/22 18:48:13 by lmeyer           ###   ########.fr       */
+/*   Updated: 2016/12/23 15:49:19 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int		main(void)
 //
 //	s = ft_strdup("coucou");
 //	printf("%s\n", ft_insert_str(s, s, s, "aaa"));
-	printf("cc_d = |%x|\n======\n", -42);
-	ft_printf("ft_d = |%x|\n======\n", -42);
+	printf("cc_d = |%-5%|\n=====\n");
+	ft_printf("ft_d = |%-5%|\n=====\n");
 
 	return (0);
 }
