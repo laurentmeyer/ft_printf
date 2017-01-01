@@ -22,9 +22,8 @@ int					ft_vprintf(const char *format, va_list ap)
 	char	*str;
 	int		ret;
 
-	if (ft_vasprintf(&str, format, ap) == ERR)
+	if ((ret = ft_vasprintf(&str, format, ap)) == ERR)
 		return (ERR);
-	ret = ft_strlen(str);
 	ft_putstr(str);
 	free(str);
 	return (ret);

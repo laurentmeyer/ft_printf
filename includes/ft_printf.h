@@ -82,6 +82,7 @@ t_handler				*get_handler(t_conv *conv);
 char					*handler_integers(t_conv *conv, void *arg);
 char					*handler_string(t_conv *conv, void *arg);
 char					*handler_percent(t_conv *conv, void *arg);
+char					*handler_char(t_conv *conv, void *arg);
 char  	  				*ft_itoa_base_max_unsigned(uintmax_t value, int base);
 char    				*ft_itoa_base_max_signed(intmax_t value, int base);
 

@@ -65,7 +65,8 @@ OBJECTS =	ft_memset.o			\
 			ft_strrev.o			\
 			ft_itoa_base.o		\
 			ft_strtolower.o		\
-			ft_strlast.o
+			ft_strlast.o		\
+			ft_wcrtoutf.o
 
 NAME = libft.a
 

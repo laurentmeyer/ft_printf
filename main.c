@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <unistd.h>
 #include "libft.h"
 #include <stdio.h>
 #include <locale.h>
@@ -25,12 +26,12 @@ printf(__VA_ARGS__)
 
 int		main(void)
 {
-//	char	*s;
-//
-//	s = ft_strdup("coucou");
-//	printf("%s\n", ft_insert_str(s, s, s, "aaa"));
-	printf("cc_d = |%-5%|\n=====\n");
-	ft_printf("ft_d = |%-5%|\n=====\n");
+//	wchar_t		*c;
+	char		c[] = { 0xE2, 0xFF, 0xAC, 0x0 };
 
+	setlocale(LC_ALL, "");
+	printf("length = %zu\n", ft_strlen(c));
+	printf("cc_d = |%8C|\n=====\n", 0x0);
+	ft_printf("ft_d = |%8C|\n=====\n", 0x0);
 	return (0);
 }

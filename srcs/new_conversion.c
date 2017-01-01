@@ -18,6 +18,8 @@ static char		*requalify_conversion(char *s)
 		return (ft_insert_str(s, conv, conv + 1, "lu"));
 	else if (*conv == 'O')
 		return (ft_insert_str(s, conv, conv + 1, "lo"));
+	else if (*conv == 'C')
+		return (ft_insert_str(s, conv, conv + 1, "lc"));
 	else
 		return (s);
 }

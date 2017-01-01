@@ -25,6 +25,14 @@ static void	remove_double_percent(char *s)
 	remove_double_percent(s + 1);
 }
 
+static void remove_null(char *s)
+{
+	if (!(s = ft_strchr(s, 0xFF)))
+		return ;
+	ft_memmove(s, s + 1, ft_strlen(s));
+	remove_null(s + 1);
+}
+
 static char	*interpret_arg(t_conv *conv, va_list ap)
 {
 	char	*ret;
@@ -57,7 +65,9 @@ int			ft_vasprintf(char **ret, const char *format, va_list ap)
 		free(interpret);
 	}
 	remove_double_percent(*ret);
-	return (ft_strlen(*ret));
+	find = ft_strlen(*ret); 
+	remove_null(*ret);
+	return (find);
 }
 
 int			ft_asprintf(char **ret, const char *format, ...)

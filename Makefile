@@ -24,6 +24,7 @@ SRCFILES =	ft_printf.c			\
 			handler_integers.c	\
 			handler_percent.c	\
 			handler_string.c	\
+			handler_char.c		\
 			ft_itoa_base_max.c
 
 SOURCES =	$(SRCFILES:%.c=$(SOURCEDIR)/%.c)

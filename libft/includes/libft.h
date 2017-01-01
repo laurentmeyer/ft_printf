@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <string.h>
+# include <wchar.h>
 # define MININT -2147483648
 # define MININTSIZE 11
 # define MININTSTR "-2147483648"
@@ -98,5 +99,6 @@ char					*ft_strrev(char *s);
 char					*ft_itoa_base(int value, int base);
 void					ft_strtolower(char *s);
 char					*ft_strlast(char *s);
+char					*ft_wcrtoutf(wchar_t w);
 
 #endif
