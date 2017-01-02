@@ -6,7 +6,7 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 11:26:20 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/20 18:43:45 by lmeyer           ###   ########.fr       */
+/*   Updated: 2017/01/02 21:17:15 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 #include "libft.h"
 #include <stdarg.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include <stdio.h>
 
-int					ft_vprintf(const char *format, va_list ap)
+int		ft_vprintf(const char *format, va_list ap)
 {
 	char	*str;
 	int		ret;
 
 	if ((ret = ft_vasprintf(&str, format, ap)) == ERR)
 		return (ERR);
-	ft_putstr(str);
+	write(1, str, ret);
 	free(str);
 	return (ret);
 }
 
-
-int					ft_printf(const char *format, ...)
+int		ft_printf(const char *format, ...)
 {
 	va_list		ap;
 	int			ret;

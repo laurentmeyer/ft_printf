@@ -1,21 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handler_char.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/02 21:27:24 by lmeyer            #+#    #+#             */
+/*   Updated: 2017/01/02 21:28:06 by lmeyer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "ft_printf.h"
 #include <stdlib.h>
 
-static char *apply_padding(t_conv *conv, char *s)
+static char	*apply_padding(t_conv *conv, char *s)
 {
+	char	*padding;
 	char	*position;
 
-//	printf("len = %zu\n", ft_strlen(s));
+	padding = (conv->flags & FLAG_ZERO) ? "0" : " ";
 	position = s;
-	if (conv->flags & FLAG_MINUS) 
+	if (conv->flags & FLAG_MINUS)
 		position = ft_strlast(s) + 1;
 	while ((int)ft_strlen(s) < conv->width)
 	{
-//		printf("re-len = %zu\n", ft_strlen(s));
-		s = ft_insert_str(s, position, position, " ");
+		s = ft_insert_str(s, position, position, padding);
 		position = s;
-		if (conv->flags & FLAG_MINUS) 
+		if (conv->flags & FLAG_MINUS)
 			position = ft_strlast(s) + 1;
 	}
 	return (s);

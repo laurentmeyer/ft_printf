@@ -6,7 +6,7 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/22 15:23:39 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/22 15:24:42 by lmeyer           ###   ########.fr       */
+/*   Updated: 2017/01/02 21:31:24 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static char *apply_padding(t_conv *conv, char *s)
+static char	*apply_padding(t_conv *conv, char *s)
 {
+	char	*padding;
 	char	*position;
 
-//	printf("len = %zu\n", ft_strlen(s));
+	padding = (conv->flags & FLAG_ZERO) ? "0" : " ";
 	position = s;
-	if (conv->flags & FLAG_MINUS) 
+	if (conv->flags & FLAG_MINUS)
 		position = ft_strlast(s) + 1;
 	while ((int)ft_strlen(s) < conv->width)
 	{
-//		printf("re-len = %zu\n", ft_strlen(s));
-		s = ft_insert_str(s, position, position, " ");
+		s = ft_insert_str(s, position, position, padding);
 		position = s;
-		if (conv->flags & FLAG_MINUS) 
+		if (conv->flags & FLAG_MINUS)
 			position = ft_strlast(s) + 1;
 	}
 	return (s);
 }
 
-static int		utf_bytes(wchar_t w)
+static int	utf_bytes(wchar_t w)
 {
 	int		bits;
 
@@ -78,7 +78,6 @@ static char	*ft_wcharttostr(wchar_t *t)
 	}
 	return (res);
 }
-
 
 char		*handler_string(t_conv *conv, void *arg)
 {

@@ -6,14 +6,14 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/22 15:26:48 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/23 15:49:35 by lmeyer           ###   ########.fr       */
+/*   Updated: 2017/01/02 21:26:39 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
 
-static char *apply_padding(t_conv *conv, char *s)
+static char	*apply_padding(t_conv *conv, char *s)
 {
 	char	*padding;
 	char	*position;
@@ -29,7 +29,6 @@ static char *apply_padding(t_conv *conv, char *s)
 	}
 	return (s);
 }
-
 
 char		*handler_percent(t_conv *conv, void *arg)
 {

@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_conversion.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/02 21:25:17 by lmeyer            #+#    #+#             */
+/*   Updated: 2017/01/02 21:25:36 by lmeyer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "ft_printf.h"
 #include <stdlib.h>
-#define MODIFIERS "hljz"
 
 #include <stdio.h>
 
@@ -31,27 +42,22 @@ t_conv			*new_conversion(char *start, int len)
 	t_conv	*new;
 	char	*s;
 
-	if (!(s = ft_strndup(start, len)) || !(s = requalify_conversion(s)))
+	if (!(s = ft_strndup(start, len))
+			|| !(s = requalify_conversion(s)))
 		return (NULL);
 	if ((new = (t_conv *)malloc(sizeof(t_conv))))
 	{
-//		printf("full conversion = %s\n", s);
 		new->conversion = *(ft_strlast(s));
 		new->modifier = get_modifier(s);
 		new->flags = get_flags(s);
 		new->precision = get_precision(s);
 		new->width = get_width(s);
-//		printf("conversion = %c\n", new->conversion);
-//		printf("flags = %d\n", new->flags);
-//		printf("precision = %d\n", new->precision);
-//		printf("width = %d\n", new->width);
-//		printf("modifier = %d\n", new->modifier);
 	}
 	free(s);
 	return (new);
 }
 
-int		find_next_conversion(char *format, char **start, char **end)
+int				find_next_conversion(char *format, char **start, char **end)
 {
 	char	*tmp;
 	int		i;
@@ -61,13 +67,17 @@ int		find_next_conversion(char *format, char **start, char **end)
 	if (tmp[1] == '%')
 		return (find_next_conversion(tmp + 2, start, end));
 	i = 1;
-	while (tmp[i])
-		if ((ft_strchr(CONVERSIONS, tmp[i++])))
-		{
-			*start = tmp;
-			*end = tmp + i - 1;
-			return (1);
-		}
-	ft_memmove(tmp, tmp + 1, ft_strlen(tmp));
+	while (tmp[i] && ft_strchr(ACCEPTABLE, tmp[i]))
+		++i;
+	if (tmp[i] && ft_strchr(CONVERSIONS, tmp[i]))
+	{
+		*start = tmp;
+		*end = tmp + i;
+		return (1);
+	}
+	if (tmp[i] == '\0')
+		*tmp = '\0';
+	else
+		ft_memmove(tmp, tmp + i, ft_strlen(tmp));
 	return (0);
 }

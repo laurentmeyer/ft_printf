@@ -6,7 +6,7 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 11:26:35 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/23 15:49:19 by lmeyer           ###   ########.fr       */
+/*   Updated: 2017/01/02 20:58:29 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int		main(void)
 	int	rot;
 
 	setlocale(LC_ALL, "");
-	ret = printf("cc_d = |% Zoooo|\n==========\n");
+	ret = printf("cc_d = |%.4c|\n==========\n", 0);
 	printf(" ret = %d\n==========\n", ret);
-	rot = ft_printf("ft_d = |% Zoooo|\n==========\n");
+	rot = ft_printf("ft_d = |%.4c|\n==========\n", 0);
 	printf(" rot = %d\n==========\n", rot);
 	return (0);
 }

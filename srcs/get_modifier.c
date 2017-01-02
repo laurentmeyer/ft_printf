@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_modifier.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/02 21:20:52 by lmeyer            #+#    #+#             */
+/*   Updated: 2017/01/02 21:23:22 by lmeyer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "ft_printf.h"
 #include <stdlib.h>
 #define MODIFIERS "hljz"
 #define MAXMODIFIERS 2
-
 
 static int		interpret_modifier(char *mod)
 {
@@ -26,7 +37,7 @@ static int		interpret_modifier(char *mod)
 	return (e);
 }
 
-int		get_modifier(char *s)
+int				get_modifier(char *s)
 {
 	char	*rev;
 	int		i;
@@ -39,7 +50,10 @@ int		get_modifier(char *s)
 	while (i > 0 && !ft_strchr(MODIFIERS, s[i]))
 		--i;
 	if (!ft_strchr(MODIFIERS, s[i]))
+	{
+		free(rev);
 		return (0);
+	}
 	rev[0] = s[i--];
 	if (rev[0] && i >= 0 && s[i] == rev[0])
 		rev[1] = s[i--];

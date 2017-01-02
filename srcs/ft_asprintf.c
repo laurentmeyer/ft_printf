@@ -6,7 +6,7 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 11:26:13 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/22 17:36:11 by lmeyer           ###   ########.fr       */
+/*   Updated: 2017/01/02 21:10:40 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,6 @@ static void	remove_double_percent(char *s)
 		return ;
 	ft_memmove(s, s + 1, ft_strlen(s));
 	remove_double_percent(s + 1);
-}
-
-static void remove_null(char *s)
-{
-	if (!(s = ft_strchr(s, 0xFF)))
-		return ;
-	ft_memmove(s, s + 1, ft_strlen(s));
-	remove_null(s + 1);
 }
 
 static char	*interpret_arg(t_conv *conv, va_list ap)
@@ -60,13 +52,15 @@ int			ft_vasprintf(char **ret, const char *format, va_list ap)
 			return (ERR);
 		interpret = interpret_arg(conv, ap);
 		free(conv);
-		if (!interpret || !(*ret = ft_insert_str(*ret, start, end + 1, interpret)))
+		if (!interpret
+				|| !(*ret = ft_insert_str(*ret, start, end + 1, interpret)))
 			return (ERR);
 		free(interpret);
 	}
 	remove_double_percent(*ret);
-	len = ft_strlen(*ret); 
-	remove_null(*ret);
+	len = ft_strlen(*ret);
+	while ((start = ft_strrchr(*ret, 0xFF)))
+		*start = '\0';
 	return (len);
 }
 

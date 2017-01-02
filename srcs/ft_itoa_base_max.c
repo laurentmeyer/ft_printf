@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa_base_max.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/02 21:18:13 by lmeyer            #+#    #+#             */
+/*   Updated: 2017/01/02 21:18:45 by lmeyer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "libft.h"
 
@@ -8,7 +20,7 @@ static char	ft_hex(int i)
 	return ('A' + i - 10);
 }
 
-char  	  *ft_itoa_base_max_unsigned(uintmax_t value, int base)
+char		*ft_itoa_base_max_unsigned(uintmax_t value, int base)
 {
 	char	*rev;
 	int		i;
@@ -30,7 +42,7 @@ char  	  *ft_itoa_base_max_unsigned(uintmax_t value, int base)
 	return (result);
 }
 
-char    *ft_itoa_base_max_signed(intmax_t value, int base)
+char		*ft_itoa_base_max_signed(intmax_t value, int base)
 {
 	char	*rev;
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 11:26:01 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/23 14:01:03 by lmeyer           ###   ########.fr       */
+/*   Updated: 2017/01/02 21:34:47 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include <stdarg.h>
 # include <inttypes.h>
 # include <wchar.h>
+# define MODIFIERS "hljz"
+# define ACCEPTABLE "0123456789.hljz#0-+ "
 # define CONVERSIONS "sSpdDioOuUxXcC%"
 # define ERR -1
 # define FLAG_ALTERNATE (1 << 0)
@@ -25,11 +27,9 @@
 
 enum					e_modif
 {
-	none = 0,
-	l = 1,
-//	hl = 1,
-	ll = 2,
-//	hhll = 2,
+	none,
+	l,
+	ll,
 	hh,
 	h,
 	j,
@@ -68,13 +68,15 @@ typedef struct			s_conv
 	char				conversion;
 }						t_conv;
 
-typedef char 			*t_handler(t_conv *, void *);
+typedef char			*t_handler(t_conv *conv, void *v);
 
 int						ft_printf(const char *format, ...);
 int						ft_vprintf(const char *format, va_list ap);
 int						ft_asprintf(char **ret, const char *format, ...);
-int						ft_vasprintf(char **ret, const char *format, va_list ap);
-int						find_next_conversion(char *format, char **start, char **end);
+int						ft_vasprintf(char **ret, const char *format,
+										va_list ap);
+int						find_next_conversion(char *format, char **start,
+												char **end);
 t_conv					*new_conversion(char *start, int len);
 int						get_modifier(char *s);
 int						get_flags(char *s);
@@ -86,7 +88,7 @@ char					*handler_string(t_conv *conv, void *arg);
 char					*handler_percent(t_conv *conv, void *arg);
 char					*handler_char(t_conv *conv, void *arg);
 char					*handler_pointer(t_conv *conv, void *arg);
-char  	  				*ft_itoa_base_max_unsigned(uintmax_t value, int base);
-char    				*ft_itoa_base_max_signed(intmax_t value, int base);
+char					*ft_itoa_base_max_unsigned(uintmax_t value, int base);
+char					*ft_itoa_base_max_signed(intmax_t value, int base);
 
 #endif

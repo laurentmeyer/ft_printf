@@ -6,14 +6,14 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/22 11:05:29 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/23 15:32:39 by lmeyer           ###   ########.fr       */
+/*   Updated: 2017/01/02 21:08:01 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
 
-static char *extra_chars(t_conv *conv, char *s)
+static char	*extra_chars(t_conv *conv, char *s)
 {
 	char	*digit;
 
@@ -27,40 +27,42 @@ static char *extra_chars(t_conv *conv, char *s)
 		s = ft_insert_str(s, digit, digit, "0");
 		digit = (*s == '-') ? s + 1 : s;
 	}
-	if ((conv->flags & FLAG_ALTERNATE) && conv->conversion == 'o') 
+	if ((conv->flags & FLAG_ALTERNATE) && conv->conversion == 'o'
+			&& !ft_strequ(s, "0"))
 		s = ft_insert_str(s, s, s, "0");
-	if ((conv->flags & FLAG_ALTERNATE) && !ft_strequ(s, "0") && !ft_strequ(s, "")
-			&& (conv->conversion == 'x' || conv->conversion == 'X')) 
+	if ((conv->flags & FLAG_ALTERNATE) && !ft_strequ(s, "0") && !ft_strequ(s,
+				"") && (conv->conversion == 'x' || conv->conversion == 'X'))
 		s = ft_insert_str(s, s, s, "0X");
-	if ((conv->flags & FLAG_PLUS) && conv->conversion == 'd' && *s != '-') 
+	if ((conv->flags & FLAG_PLUS) && conv->conversion == 'd' && *s != '-')
 		s = ft_insert_str(s, s, s, "+");
-	if ((conv->flags & FLAG_SPACE) && conv->conversion == 'd' && *s != '-') 
+	if ((conv->flags & FLAG_SPACE) && conv->conversion == 'd' && *s != '-')
 		s = ft_insert_str(s, s, s, " ");
 	return (s);
 }
 
-static char *apply_padding(t_conv *conv, char *s)
+static char	*apply_padding(t_conv *conv, char *s)
 {
 	char	*padding;
 	char	*position;
 
 	padding = (conv->flags & FLAG_ZERO) ? "0" : " ";
 	position = s;
-	if (conv->flags & FLAG_MINUS) 
+	if (conv->flags & FLAG_MINUS)
 		position = ft_strlast(s) + 1;
-	else if (conv->flags & FLAG_ZERO && s[0] == '0' && (s[1] == 'x' || s[1] == 'X'))
+	else if (conv->flags & FLAG_ZERO && *s == '0' &&
+			(s[1] == 'x' || s[1] == 'X'))
 		position = s + 2;
-	else if (conv->flags & FLAG_ZERO && (s[0] == '+' || s[0] == '-'))
+	else if (conv->flags & FLAG_ZERO && (*s == '+' || *s == ' ' || *s == '-'))
 		position = s + 1;
 	while ((int)ft_strlen(s) < conv->width)
 	{
 		s = ft_insert_str(s, position, position, padding);
 		position = s;
-		if (conv->flags & FLAG_MINUS) 
+		if (conv->flags & FLAG_MINUS)
 			position = ft_strlast(s) + 1;
 		else if (s[0] == '0' && (s[1] == 'x' || s[1] == 'X'))
 			position = s + 2;
-		else if (s[0] == '+' || s[0] == '-')
+		else if (s[0] == '+' || s[0] == ' ' || s[0] == '-')
 			position = s + 1;
 	}
 	return (s);

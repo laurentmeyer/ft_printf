@@ -6,7 +6,7 @@
 /*   By: lmeyer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/22 11:11:30 by lmeyer            #+#    #+#             */
-/*   Updated: 2016/12/22 11:35:50 by lmeyer           ###   ########.fr       */
+/*   Updated: 2017/01/02 21:08:34 by lmeyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	ft_hex(int i)
 	return ('A' + i - 10);
 }
 
-char    *ft_itoa_base(int value, int base)
+char	*ft_itoa_base(int value, int base)
 {
 	char	*rev;
 	int		i;
