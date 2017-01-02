@@ -50,13 +50,13 @@ int			ft_vasprintf(char **ret, const char *format, va_list ap)
 	char	*end;
 	char	*interpret;
 	t_conv	*conv;
-	int		find;
+	int		len;
 
 	if (!(*ret = ft_strdup(format)))
 		return (ERR);
-	while ((find = find_next_conversion(*ret, &start, &end)))
+	while ((find_next_conversion(*ret, &start, &end)))
 	{
-		if (find == ERR	|| !(conv = new_conversion(start, end - start + 1)))
+		if (!(conv = new_conversion(start, end - start + 1)))
 			return (ERR);
 		interpret = interpret_arg(conv, ap);
 		free(conv);
@@ -65,9 +65,9 @@ int			ft_vasprintf(char **ret, const char *format, va_list ap)
 		free(interpret);
 	}
 	remove_double_percent(*ret);
-	find = ft_strlen(*ret); 
+	len = ft_strlen(*ret); 
 	remove_null(*ret);
-	return (find);
+	return (len);
 }
 
 int			ft_asprintf(char **ret, const char *format, ...)

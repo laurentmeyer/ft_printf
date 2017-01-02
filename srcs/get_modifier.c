@@ -2,11 +2,10 @@
 #include "ft_printf.h"
 #include <stdlib.h>
 #define MODIFIERS "hljz"
+#define MAXMODIFIERS 2
 
-#include <stdio.h>
 
-
-static int		interpret_modifier(char mod[3])
+static int		interpret_modifier(char *mod)
 {
 	enum e_modif	e;
 
@@ -29,20 +28,25 @@ static int		interpret_modifier(char mod[3])
 
 int		get_modifier(char *s)
 {
-	char			mod[3];
-	int				i;
+	char	*rev;
+	int		i;
+	char	*mod;
+	int		ret;
 
-	ft_bzero(mod, sizeof(mod));
-	i = 0;
-	while (s[i] && !ft_strchr(MODIFIERS, s[i]))
-			++i;
+	if (!(rev = ft_strnew(MAXMODIFIERS + 1)))
+		return (ERR);
+	i = ft_strlen(s) - 1;
+	while (i > 0 && !ft_strchr(MODIFIERS, s[i]))
+		--i;
 	if (!ft_strchr(MODIFIERS, s[i]))
 		return (0);
-	mod[0] = s[i++];
-	if (mod[0] && s[i] == mod[0])
-		mod[1] = s[i++];
-	++i;
-	if (s[i] != '\0')
+	rev[0] = s[i--];
+	if (rev[0] && i >= 0 && s[i] == rev[0])
+		rev[1] = s[i--];
+	if (!(mod = ft_strrev(rev)))
 		return (ERR);
-	return (interpret_modifier(mod));
+	ret = interpret_modifier(mod);
+	free(rev);
+	free(mod);
+	return (ret);
 }

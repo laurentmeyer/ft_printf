@@ -26,12 +26,13 @@ printf(__VA_ARGS__)
 
 int		main(void)
 {
-//	wchar_t		*c;
-	char		c[] = { 0xE2, 0xFF, 0xAC, 0x0 };
+	int	ret;
+	int	rot;
 
 	setlocale(LC_ALL, "");
-	printf("length = %zu\n", ft_strlen(c));
-	printf("cc_d = |%8C|\n=====\n", 0x0);
-	ft_printf("ft_d = |%8C|\n=====\n", 0x0);
+	ret = printf("cc_d = |% Zoooo|\n==========\n");
+	printf(" ret = %d\n==========\n", ret);
+	rot = ft_printf("ft_d = |% Zoooo|\n==========\n");
+	printf(" rot = %d\n==========\n", rot);
 	return (0);
 }

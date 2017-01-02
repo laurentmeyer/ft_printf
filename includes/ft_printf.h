@@ -25,11 +25,13 @@
 
 enum					e_modif
 {
-	none,
+	none = 0,
+	l = 1,
+//	hl = 1,
+	ll = 2,
+//	hhll = 2,
 	hh,
 	h,
-	l,
-	ll,
 	j,
 	z
 };
@@ -83,6 +85,7 @@ char					*handler_integers(t_conv *conv, void *arg);
 char					*handler_string(t_conv *conv, void *arg);
 char					*handler_percent(t_conv *conv, void *arg);
 char					*handler_char(t_conv *conv, void *arg);
+char					*handler_pointer(t_conv *conv, void *arg);
 char  	  				*ft_itoa_base_max_unsigned(uintmax_t value, int base);
 char    				*ft_itoa_base_max_signed(intmax_t value, int base);
 

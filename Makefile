@@ -12,19 +12,19 @@ LIBFT = 	$(LFTPATH)/libft.a
 CCHEADERS = -I./$(HEADERDIR)	\
 			-I$(LFTPATH)/includes
 
-SRCFILES =	ft_printf.c			\
-			ft_asprintf.c		\
-			get_conversion.c	\
-			new_conversion.c	\
-			get_handler.c		\
-			get_modifier.c		\
-			get_flags.c			\
-			get_precision.c		\
-			get_width.c			\
-			handler_integers.c	\
-			handler_percent.c	\
-			handler_string.c	\
-			handler_char.c		\
+SRCFILES =	ft_printf.c				\
+			ft_asprintf.c			\
+			get_conversion.c		\
+			get_handler.c			\
+			get_modifier.c			\
+			get_flags.c				\
+			get_precision.c			\
+			get_width.c				\
+			handler_integers.c		\
+			handler_percent.c		\
+			handler_string.c		\
+			handler_char.c			\
+			handler_pointer.c		\
 			ft_itoa_base_max.c
 
 SOURCES =	$(SRCFILES:%.c=$(SOURCEDIR)/%.c)
@@ -39,7 +39,6 @@ $(NAME) : $(OBJECTS)
 	ar rcs $(TEMP) $(OBJECTS)
 	libtool -static -o $(NAME) $(LIBFT) $(TEMP)
 	rm $(TEMP)
-	#ar -t libftprintf.a
 
 $(BUILDDIR)/%.o : $(SOURCEDIR)/%.c
 	$(CC) $(CFLAGS) $(CCHEADERS) -c $< -o $@
@@ -53,6 +52,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-	
-
-#################ENLEVER LES COMMENTAIRES / VERIFS ####################

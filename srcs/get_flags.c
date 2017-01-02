@@ -13,13 +13,6 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-#include <stdio.h>
-
-//static int	is_alternable(char *s)
-//{
-//	return (!ft_strchr(NON_ALTERNABLE, s[ft_strlen(s) - 1]));
-//}
-
 int			get_flags(char *s)
 {
 	int		res;
@@ -45,8 +38,5 @@ int			get_flags(char *s)
 		res |= FLAG_PLUS;
 		res &= ~FLAG_SPACE;
 	}
-//	printf("spec = %s\n", s);
-//	printf("alternate = %d\n", FLAG_ALTERNATE);
-//	printf("opposite = %d\n", FLAG_ALTERNATE & ~FLAG_ALTERNATE);
 	return (res);
 }
